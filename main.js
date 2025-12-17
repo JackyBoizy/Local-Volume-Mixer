@@ -13,9 +13,8 @@ function runPS(scriptFile, ...args) {
     return Promise.reject(new Error('PowerShell script not found'));
   }
 
-  // Wrap in quotes in case of spaces or emojis
-  const quotedScript = `"${scriptFile}"`;
-  const psArgs = ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', quotedScript, ...args.map(String)];
+  // Do NOT wrap scriptFile in quotes; execFile handles paths with spaces
+  const psArgs = ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', scriptFile, ...args.map(String)];
 
   console.log('Running PowerShell command:', 'powershell.exe', psArgs.join(' '));
 
@@ -54,14 +53,16 @@ app.whenReady().then(createWindow);
 // ---------------------
 // IPC Handlers
 // ---------------------
-const audioScript = path.join(__dirname, 'audio.ps1');
-const setVolumeScript = path.join(__dirname, 'setVolume.ps1');
-const toggleMuteScript = path.join(__dirname, 'toggleMute.ps1');
+const audioScript = path.join(__dirname, 'src/audio/audio.ps1');
+const setVolumeScript = path.join(__dirname, 'src/audio/setVolume.ps1');
+const toggleMuteScript = path.join(__dirname, 'src/audio/toggleMute.ps1');
 
 // Get audio sessions
 ipcMain.handle('audio:getSessions', async () => {
   try {
     const output = await runPS(audioScript);
+    console.log('Raw PowerShell output:', output); // <-- add this
+
     if (!output) return [];
     try {
       return JSON.parse(output);
@@ -74,6 +75,7 @@ ipcMain.handle('audio:getSessions', async () => {
     return [];
   }
 });
+
 
 // Set volume
 ipcMain.handle('audio:setVolume', async (_, pid, level) => {

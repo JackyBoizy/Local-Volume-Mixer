@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Volume Mixer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1e1e1e;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .session {
+      display: flex;
+      align-items: center;
+      background: #2e2e2e;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .session img {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+      border-radius: 4px;
+    }
+    .session-info {
+      flex: 1;
+    }
+    .session-info .name {
+      font-weight: bold;
+    }
+    .session-controls {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    input[type="range"] {
+      width: 100px;
+    }
+    button {
+      background: #444;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Local Volume Mixer</h1>
+  <div id="sessions-container"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

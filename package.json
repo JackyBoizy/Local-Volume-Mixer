@@ -1,0 +1,15 @@
+{
+  "name": "local-volume-mixer",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^30.0.0"
+  },
+  "dependencies": {
+    "win-audio": "^2.0.0",
+    "extract-file-icon": "^0.3.0"
+  }
+}
